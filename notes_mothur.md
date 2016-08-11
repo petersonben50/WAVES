@@ -629,3 +629,56 @@ summary.seqs(fasta=data/WAVES.data/mothur/WAVES.trim.contigs.good.unique.good.fi
 
 summary.seqs(fasta=data/WAVES.data/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=data/WAVES.data/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.count_table)
 ```
+
+
+###### Pull out the files we want.
+
+First of all. Which files do we want? We want a shared table. Get both the subsampled and the originally sized file. These are the current files after running all my code.
+
+mothur.1469725363.logfile
+
+mothur > get.current()
+[WARNING]: Cannot determine number of physical pages
+
+Current RAM usage: 1.33232 Gigabytes. Total Ram: 0 Gigabytes.
+
+Current files saved by mothur:
+accnos=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos
+column=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta.189.dist
+fasta=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta
+group=data/WAVES/mothur/WAVES.contigs.good.groups
+list=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list
+name=data/WAVES/mothur/WAVES.trim.contigs.good.names
+qfile=data/WAVES/mothur/WAVES.trim.contigs.qual
+shared=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared
+taxonomy=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.gg.wang.pick.taxonomy
+count=data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table
+processors=2
+file=data/WAVES/mothur/fileList.paired.file
+
+Current input directory saved by mothur: data/WAVES/dataRaw/
+
+Current output directory saved by mothur: data/WAVES/mothur/
+
+Current default directory saved by mothur: mothur/
+
+Current working directory: /home/ubuntu/
+
+Output File Names:
+data/WAVES/mothur/current_files.summary
+
+
+- Let's grab shared, list, taxonomy, count, for original and subsampled
+
+```
+mv data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.shared data/WAVES/dataEdited/WAVES.final.shared
+
+mv data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list data/WAVES/dataEdited/WAVES.final.list
+
+mv data/WAVES/mothur/data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.gg.wang.pick.taxonomy data/WAVES/dataEdited/WAVES.final.taxonomy
+
+mv data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.pick.count_table data/WAVES/dataEdited/WAVES.final.count_table
+
+mv data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.0.03.subsample.shared data/WAVES/dataEdited/WAVES.final.subsample.shared
+
+```

@@ -46,6 +46,8 @@ remove.lineage(fasta=current, count=current, taxonomy=current, taxon=Chloroplast
 
 # Cluster the OTUs, split into their orders first to make it faster (taxlevel=4 signifies Order)
 cluster.split(fasta=current, count=current, taxonomy=current, splitmethod=classify, taxlevel=4, cutoff=0.15)
+# Output: 
+#data/WAVES/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list
 
 # Make the shared table to see how many of the OTUs are in each sample
 make.shared(list=current, count=current, label=0.03)
@@ -65,6 +67,6 @@ sub.sample(shared=current, size=4421)
 heatmap.bin(shared=current, scale=log2, numotu=50)
 
 # Generate distance matrix
-asd
+
 
 # quit()
