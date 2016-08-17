@@ -57,6 +57,9 @@ cat /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.above.98.FWonly_11Feb
 sed 's/[[:blank:]]/\;/' </Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy >/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy.reformatted
 mv /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy.reformatted /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy
 
+#sed 's/[-]/\_/' </Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy >/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy.reformatted
+#mv /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy.reformatted /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy
+
 # Move a copy of this OTU classification file to dataEdited folder in the WAVES
 # directory on my computer.
 cp /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy ./dataEdited/WAVES.taxonomy
