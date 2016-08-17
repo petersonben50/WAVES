@@ -32,7 +32,8 @@ count.seqs(name=current, group=current)
 # Align our sequences to the alignment from the Silva database previously generated.
 align.seqs(fasta=current, reference=/Volumes/BDPLabHD/data/referenceDB/silva.v4.reference.fasta)
 
-# Trim the alignment. Must start before or at 1968, end at or after 11550, and have a max homopolymer length of 8
+# Trim the alignment. Must start before or at 1968, end at or after 11550,
+# and have a max homopolymer length of 8
 screen.seqs(fasta=current, count=current, summary=current, start=1968, end=11550, maxhomop=8)
 
 # Filter out the sequences to cut out ones with a period in them
@@ -48,19 +49,52 @@ pre.cluster(fasta=current, count=current, diffs=2)
 chimera.uchime(fasta=current, count=current, dereplicate=t)
 remove.seqs(fasta=current, accnos=current)
 
+# Subsample the shared file so that each sample has the same number of sequences
+# in it. This essentially evens out the sampling effort.
+# Here, B1014 has the lowest number of sequences, which is 4426
+list.seqs(name=current)
+get.seqs(group=current, accnos=current)
+#sub.sample(fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=current, persample=T,  size=4426)
+
 # Cluster the OTUs.
 # First, we need to calculate the distance between sequences
 dist.seqs(fasta=current, cutoff=0.20)
 # The sequences are then clustered based on that distance matrix
 cluster(column=current, count=current)
 
-# Make the shared table to see how many of the OTUs are in each sample
-make.shared(list=current, count=current, label=0.03)
+# Get a representative sequence for each OTU that can then be used to classify
+# the OTU. Otherwise, this gets really messy.
+get.oturep(column=current, name=current, list=current, fasta=current, label=0.03)
 
-# Subsample the shared file so that each sample has the same number of sequences
-# in it. This essentially evens out the sampling effort.
-# Here, B1014 has the lowest number of sequences, which is 4426
-sub.sample(shared=current, size=4426)
+# Make the shared table to see how many of the OTUs are in each sample
+#make.shared(list=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.list, count=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, label=0.03)
+make.shared(list=current, count=current, label=0.03)
+# Get current
+#Current files saved by mothur:
+#accnos=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos
+#column=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.dist
+#fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta
+#group=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.contigs.good.groups
+#list=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.list
+#name=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.unique.rep.names
+#qfile=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.qual
+#shared=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.shared
+#count=co
+#processors=2
+#file=/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/fileList.paired.file
+#
+#Current input directory saved by mothur: /Volumes/BDPLabHD/data/WAVES/dataEdited/
+#
+#Current output directory saved by mothur: /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/
+#
+#Current default directory saved by mothur: /usr/local/bin/
+#
+#Current working directory: /Users/benjaminpeterson/Documents/gradSchool/research/mercury/WAVES/
+#
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/current_files.summary
+
+
 
 # Save a file that has the last current files
 get.current()
