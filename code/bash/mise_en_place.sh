@@ -15,3 +15,6 @@ rm /Volumes/BDPLabHD/data/WAVES/dataEdited/._*
 # Only needed if I'm rerunning the file.
 # Can you tell I hate having unneeded files lying around?
 rm mothur.*.logfile
+
+# Prepare the database files that are needed.
+makeblastdb -dbtype nucl -in /Volumes/BDPLabHD/data/referenceDB/FWonly_11Feb2016_1452_ready.fasta -input_type fasta -parse_seqids -out /Volumes/BDPLabHD/data/referenceDB/FWonly_11Feb2016_1452_ready.fasta.db

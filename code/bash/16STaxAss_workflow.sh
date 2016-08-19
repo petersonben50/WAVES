@@ -46,11 +46,11 @@ python code/python/create_fastas_given_seqIDs.py /Volumes/BDPLabHD/data/WAVES/da
 # Classify each group of OTUs using mothur with the two different databases.
 # Sequences with pident above 98 are classified using the FW database.
 # Sequences with pident below 98 are classified using the Gg database.
-mothur "#classify.seqs(fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.above.98.fasta, template=/Volumes/BDPLabHD/data/referenceDB/FWonly_11Feb2016_1452_ready.fasta, taxonomy=/Volumes/BDPLabHD/data/referenceDB/FWonly_11Feb2016_1452.taxonomy, method=wang, probs=T, processors=2)"
-mothur "#classify.seqs(fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.below.98.fasta, template=/Volumes/BDPLabHD/data/referenceDB/gg_13_5.fasta, taxonomy=/Volumes/BDPLabHD/data/referenceDB/gg_13_5_taxonomy_FWedit.txt, method=wang, probs=T, processors=2)"
+mothur "#classify.seqs(fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.above.98.fasta, template=/Volumes/BDPLabHD/data/referenceDB/FW_Robin.fasta, taxonomy=/Volumes/BDPLabHD/data/referenceDB/FW_Robin.taxonomy, method=wang, probs=T, processors=2)"
+mothur "#classify.seqs(fasta=/Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.below.98.fasta, template=/Volumes/BDPLabHD/data/referenceDB/Gg_Robin.fasta, taxonomy=/Volumes/BDPLabHD/data/referenceDB/Gg_Robin.taxonomy, method=wang, probs=T, processors=2)"
 
 # Concatonate the two separate classifications together.
-cat /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.above.98.FWonly_11Feb2016_1452.wang.taxonomy /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.below.98.gg_13_5_taxonomy_FWedit.wang.taxonomy > /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy
+cat /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.above.98.FW_Robin.wang.taxonomy /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/otus.below.98.Gg_Robin.wang.taxonomy > /Volumes/BDPLabHD/data/WAVES/dataEdited/16STaxAss/WAVES.taxonomy
 
 # Reformat the OTU classification files so that it is delimited by semicolons,
 # rather than spaces or tabs.

@@ -25,25 +25,51 @@ screen.seqs(fasta=current, group=current, maxambig=0, maxlength=275, maxhomop=8)
 
 # Retrieve unique sequences
 unique.seqs(fasta=current)
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.names
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.fasta
+
 
 # Generate a count table that lists the copy number of each unique sequence
 count.seqs(name=current, group=current)
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.count_table
 
 # Align our sequences to the alignment from the Silva database previously generated.
-align.seqs(fasta=current, reference=/Volumes/BDPLabHD/data/referenceDB/silva.v4.reference.fasta)
+align.seqs(fasta=current, reference=/Volumes/BDPLabHD/data/referenceDB/silva.bacteria.pcr.fasta, flip=T)
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.align
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.align.report
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.flip.accnos
 
-# Trim the alignment. Must start before or at 1968, end at or after 11550,
-# and have a max homopolymer length of 8
-screen.seqs(fasta=current, count=current, summary=current, start=1968, end=11550, maxhomop=8)
+get.summary()
+
+# Trim the alignment. Must start before or at 1968, end at or after 11550
+screen.seqs(fasta=current, count=current, summary=current, start=1968, end=11550)
 
 # Filter out the sequences to cut out ones with a period in them
 filter.seqs(fasta=current, vertical=T, trump=.)
+#Length of filtered alignment: 483
+#Number of columns removed: 12942
+#Length of the original alignment: 13425
+#Number of sequences used to construct filter: 36529
+#
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.filter
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.fasta
+
 
 # Remake the unique sequence list with the filtered sequences
 unique.seqs(fasta=current, count=current)
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.count_table
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.fasta
 
 # Precluster the data to denoise it. Speeds up computation
 pre.cluster(fasta=current, count=current, diffs=2)
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.fasta
+
+
 
 # Remove chimeras
 chimera.uchime(fasta=current, count=current, dereplicate=t)
@@ -59,8 +85,12 @@ get.seqs(group=current, accnos=current)
 # Cluster the OTUs.
 # First, we need to calculate the distance between sequences
 dist.seqs(fasta=current, cutoff=0.20)
+#Output File Names:
+#/Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.dist
 # The sequences are then clustered based on that distance matrix
 cluster(column=current, count=current)
+#
+
 
 # Get a representative sequence for each OTU that can then be used to classify
 # the OTU. Otherwise, this gets really messy.

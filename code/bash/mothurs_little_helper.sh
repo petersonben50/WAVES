@@ -10,30 +10,37 @@
 cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.shared /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.shared
 # Fasta file - Obviously.
 cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.0.03.rep.fasta /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.longname.fasta
+# Fasta files test sequences
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.0.03.rep.fasta /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.test.fasta
 # List file - List of sequences that go with each OTU
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.list /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.list
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.list /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.list
 # Name file - For use in the taxonomy summary later
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.0.03.rep.names /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.names
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.trim.contigs.good.unique.good.filter.unique.precluster.pick.an.unique_list.0.03.rep.names /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.names
 # Group file - For use in the taxonomy summary later
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.contigs.good.pick.groups /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.groups
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.contigs.good.pick.groups /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.groups
 
 # Let's also move these files onto my computer in the dataEdited directory
 # Shared file
 cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.shared ./dataEdited/WAVES.final.shared
 # Fasta file
 cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.longname.fasta ./dataEdited/WAVES.final.longname.fasta
+# Fasta file with all unique sequences
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.test.fasta ./dataEdited/WAVES.test.fasta
 # List file
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.list ./dataEdited/WAVES.final.list
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.list ./dataEdited/WAVES.final.list
 # Name file - For use in the taxonomy summary later
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.names ./dataEdited/WAVES.final.names
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.names ./dataEdited/WAVES.final.names
 # Group file - For use in the taxonomy summary later
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.final.groups ./dataEdited/WAVES.final.groups
+#cp /Volumes/BDPLabHD/data/WAVES/dataEdited/mothur/WAVES.final.groups ./dataEdited/WAVES.final.groups
 
 # Reformat the fasta file names so the sequence name is >OtuXXXX
-sed 's/.*\(Otu[0-9]*\).*/>\1/' /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.longname.fasta > /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.fasta
+sed 's/.*\(Otu[0-9]*\).*/>\1/' dataEdited/WAVES.final.longname.fasta > dataEdited/WAVES.final.hyphen.fasta
+
+# Remove hyphens in the fasta file before blasting
+sed 's/-//g' dataEdited/WAVES.final.hyphen.fasta > ./dataEdited/WAVES.final.fasta
 
 # Also move this code onto BDPLabHD
-cp /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.fasta ./dataEdited/WAVES.final.fasta
+cp ./dataEdited/WAVES.final.fasta /Volumes/BDPLabHD/data/WAVES/dataEdited/WAVES.final.fasta
 
 # Now reformat the shared file into an OTU table using an R script that I wrote.
 RScript code/R/convert_shared_file.R
